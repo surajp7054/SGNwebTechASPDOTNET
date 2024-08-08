@@ -1,0 +1,45 @@
+﻿@page "/Contactus"
+@using SGNwebTech.Data
+@using SGNwebTech.ServiceLayer
+@inject DataService DataService
+<h3>Contactus</h3>
+
+
+                        <EditForm Model="custmercontactusform" OnValidSubmit="HandleValidSubmit" FormName="customerform">
+                            <div class="row">
+                                <div class="form-floating mb-1">
+                                    <InputText type="text" class="form-control form-control-sm" id="txtfirstname" placeholder="First Name" @bind-Value="custmercontactusform.CUST_FIRST_NAME" />
+                                    <label for="txtfirstname" class="text-secondary ml-1">First Name</label>
+                                </div>
+                                <div class="form-floating mb-1">
+                                    <InputText type="text" class="form-control form-control-sm" id="txtlastname" placeholder="Last Name" @bind-Value="custmercontactusform.CUST_LAST_NAME" />
+                                    <label for="txtlastname" class="text-secondary ml-1">Last Name</label>
+                                </div>
+                                <div class="form-floating mb-1">
+                                    <InputText type="text" class="form-control form-control-sm" id="txtmobileno" placeholder="Mobile Number" @bind-Value="custmercontactusform.CUST_MOBILE_NO" />
+                                    <label for="txtmobileno" class="text-secondary ml-1">Mobile Number</label>
+                                </div>
+                                <div class="form-floating mb-1">
+                                    <InputText type="email" class="form-control form-control-sm" id="txtemailid" placeholder="Email Id" @bind-Value="custmercontactusform.CUST_EMAIL_ID" />
+                                    <label for="txtemailid" class="text-secondary ml-1">Email Id</label>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <InputTextArea class="form-control form-control-sm" id="txtaddress" placeholder="Message" @bind-Value="custmercontactusform.CUST_MESSAGE"></InputTextArea>
+                                    <label for="txtaddress" class="text-secondary ml-1">Message</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mb-2">Submit</button>
+                        </EditForm>
+
+
+@code {
+    private CustomerFormdata custmercontactusform = new CustomerFormdata();
+
+    private async Task HandleValidSubmit()
+    {
+
+        await DataService.AddCustomer(custmercontactusform);
+    }
+
+
+}
